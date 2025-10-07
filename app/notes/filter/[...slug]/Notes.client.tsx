@@ -15,6 +15,7 @@ import NoteForm from "@/components/NoteForm/NoteForm";
 import Loader from "@/app/loading";
 import ErrorMessage from "@/app/notes/filter/[...slug]/error";
 import NoteList from "@/components/NoteList/NoteList";
+import Link from "next/link";
 
 export default function NotesClient({ tag }: { tag?: string }) {
   const [search, setSearch] = useState("");
@@ -33,6 +34,17 @@ export default function NotesClient({ tag }: { tag?: string }) {
     placeholderData: keepPreviousData,
   });
   const notes = data?.notes ?? [];
+  useEffect(() => {
+    if (localStorage.getItem("noteCreated") === "true") {
+      toast.success("Your note added successfully");
+      // setTimeout(() => {
+      //   localStorage.removeItem("noteCreated");
+      // }, 1000);
+      requestAnimationFrame(() => {
+        localStorage.removeItem("noteCreated");
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (
@@ -70,9 +82,9 @@ export default function NotesClient({ tag }: { tag?: string }) {
           />
         )}
 
-        <button className={css.button} onClick={() => setIsOpenModal(true)}>
+        <Link className={css.button} href={"/notes/action/create"}>
           Create note
-        </button>
+        </Link>
 
         {isOpenModal && (
           <Modal onClose={() => setIsOpenModal(false)}>

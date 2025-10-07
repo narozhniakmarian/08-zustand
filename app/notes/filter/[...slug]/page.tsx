@@ -12,7 +12,7 @@ interface NotesProps {
   params: { slug: string[] };
 }
 export async function generateMetadata({ params }: NotesProps) {
-  const { slug } = params;
+  const { slug } = await params;
   const filterName = slug.join(" / ");
 
   return {
@@ -35,9 +35,9 @@ export async function generateMetadata({ params }: NotesProps) {
 }
 
 async function Notes({ params }: NotesProps) {
+  const { slug } = await params;
   const queryClient = new QueryClient();
 
-  const { slug } = params;
   const tag = slug[0] === "All" ? undefined : slug[0];
 
   const search = "";

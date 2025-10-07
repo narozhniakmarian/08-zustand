@@ -10,11 +10,11 @@ import { createNote } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { useNoteDraftStore } from "@/lib/stores/counterStore";
 
-const InitialValues: NotePost = {
-  title: "",
-  content: "",
-  tag: "Todo",
-};
+// const InitialValues: NotePost = {
+//   title: "",
+//   content: "",
+//   tag: "Todo",
+// };
 
 export default function NoteForm() {
   const router = useRouter();
@@ -36,10 +36,10 @@ export default function NoteForm() {
   const mutation = useMutation({
     mutationFn: async (newNote: NotePost) => await createNote(newNote),
     onSuccess: () => {
-      toast.success("Your note added successfully");
+      localStorage.setItem("noteCreated", "true");
       queryClient.invalidateQueries({ queryKey: ["noteHubKey"] });
       clearDraft();
-      router.push("/filter/All");
+      router.push("/notes/filter/All");
     },
   });
 
@@ -57,7 +57,8 @@ export default function NoteForm() {
 
   return (
     <Formik
-      initialValues={InitialValues}
+      initialValues={draft}
+      enableReinitialize={true}
       validationSchema={CreateNoteFormSchema}
       onSubmit={handleSubmit}
     >
@@ -73,6 +74,7 @@ export default function NoteForm() {
             className={css.input}
             value={draft?.title}
             onChange={handleChange}
+            required
           />
           <ErrorMessage name="title" className={css.error} component="span" />
         </div>

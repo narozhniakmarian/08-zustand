@@ -1,6 +1,6 @@
 //components / SidebarNotes / SidebarNotes.tsx;
 
-import Link from "next/link";
+// import Link from "next/link";
 import css from "./SidebarNotes.module.css";
 import { tags } from "@/constants/tags";
 import AnimatedLink from "./AnimatedLink/AnimatedLink";
@@ -18,13 +18,13 @@ const SidebarNotes = () => {
             />
           </li>
         ))}
-        <li className={css.menuItem}>
+        {/* <li className={css.menuItem}>
           <AnimatedLink
             href="/notes/action/create"
             text="Create note"
             className={css.menuLink}
           />
-        </li>
+        </li> */}
       </ul>
     </div>
   );

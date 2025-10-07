@@ -1,6 +1,10 @@
 .app {
-    width: 100%;
+    width: 1280px;
     margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 32px;
     border: 1px solid #6b3d9c8c;
     background-color: #646ae15d;

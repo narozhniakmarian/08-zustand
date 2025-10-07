@@ -2,19 +2,18 @@
 
 import { Roboto } from "next/font/google";
 import "modern-normalize";
-import "./global.css";
+import "./globals.css";
 import Header from "@/components/Header/Header";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import { Footer } from "@/components/Footer/Footer";
 import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: {
     default: "My Notes App",
     template: "%s | My Notes App",
   },
   description: "Створю, редагуй та просто переглядай нотатки",
-  viewport: "width=device-width, initial-scale=1",
   keywords: ["blog", "posts", "react", "next.js", "seo"],
   authors: [
     {
@@ -23,7 +22,6 @@ export const metadata = {
     },
   ],
   creator: "Marian Dev",
-  themeColor: "#ffffff",
   openGraph: {
     title: "My Notes App",
     description: "Створю, редагуй та просто переглядай нотатки",
@@ -52,6 +50,11 @@ export const metadata = {
     shortcut: "/favicon.ico",
     apple: "../pablic/favicon/my_logo.png",
   },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 const roboto = Roboto({
