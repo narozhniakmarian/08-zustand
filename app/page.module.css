@@ -1,0 +1,83 @@
+:root {
+  --glow-gradient: linear-gradient(45deg, #ff0d00, #ff001e, #0022ff, #0011ff, #ff0000, #ff0048, #1900ff, #0800ff, #e100ff);
+  --background-color: #f8f9fa;
+  --border-bottom: 1px solid #dee2e6;
+  --color: #212529;
+  --input-background: #f1f3f5;
+  --placeholder-color: rgba(170, 191, 202, 0.852);
+  --box-shadow-item: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --box-shadow-item-hover: 0 4px 8px rgba(0, 0, 0, 0.222);
+  --content-color: #495057;
+  --item-border: 1px solid #dee2e6;
+  --backdrop-background-color: rgba(33, 37, 41, 0.6);
+}
+
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --glow-gradient: linear-gradient(45deg, #0011ffb1, #ffe600f1, #0022ff, #0011ff, #0011ff, #ffdd00fc, #1900ff, #0800ff7c, #ffe600ea);
+    --background-color: #1e1e1e;
+    --border-bottom: 1px solid #dee2e63e;
+    --color: #f1f1f1;
+    --input-background: #2c2f33;
+    --placeholder-color: rgba(170, 191, 202, 0.507);
+    --item-border: 1px solid #333;
+    --box-shadow-item: 0 2px 4px rgba(249, 248, 248, 0.216);
+    --box-shadow-item-hover: 0 4px 8px rgba(244, 242, 242, 0.479);
+    --content-color: #afbecd;
+    --backdrop-background-color: rgba(144, 146, 148, 0.6);
+  }
+}
+
+
+body {
+  margin: 0;
+  background-color: #ffffff;
+}
+
+
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1e1e1e;
+    color: #f1f1f1;
+  }
+}
+
+
+.container {
+  width: 90%;
+  max-width: 1280px;
+  margin: 0px auto;
+  padding: 0 16px 16px;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.description {
+  font-size: 18px;
+  color: #444444;
+  line-height: 28px;
+  margin-bottom: 16px;
+}
+
+.app {
+  width: 100%;
+  margin: 0px auto;
+  padding: 32px;
+  border: 1px solid #6b3d9c8c;
+  background-color: #646ae15d;
+  border-radius: 80px;
+  -webkit-box-shadow: 0 0 20px #a90dfda5, inset 0px 0px 0.9em 10px #0d00ff4d,
+    0px 0px 0.8em 20px #a90dfda5, inset 0 0 10px #0d6dfd33;
+  -moz-box-shadow: 0 0 10px #a90dfda5, inset 0px 0px 0.7em 10px #0d00ff4d,
+    0px 0px 0.9em 0px #a90dfda5, inset 0 0 10px #0d6dfd33;
+  box-shadow: 0 0 10px #a90dfda5, inset 0px 0px 0.9em 0px #0d00ff4d,
+    0px 0px 0.7em 0px #0d00ff4d, inset 0 0 10px #0d6dfd33;
+}
