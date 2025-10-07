@@ -1,14 +1,14 @@
-import { ErrorMessage, Field, Form, Formik, type FormikHelpers } from "formik";
+//components/NoteForm/NoteForm.tsx
+"use client";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import * as Yup from "yup";
 import css from "./NoteForm.module.css";
 import { toast } from "react-toastify";
 import { NotePost } from "@/types/note";
 import { createNote } from "@/lib/api";
-
-interface NoteFormProps {
-  onClose: () => void;
-}
+import { useRouter } from "next/navigation";
+import { useNoteDraftStore } from "@/lib/stores/counterStore";
 
 const InitialValues: NotePost = {
   title: "",
@@ -16,15 +16,30 @@ const InitialValues: NotePost = {
   tag: "Todo",
 };
 
-export default function NoteForm({ onClose }: NoteFormProps) {
+export default function NoteForm() {
+  const router = useRouter();
+
   const queryClient = useQueryClient();
 
+  const { draft, setDraft, clearDraft } = useNoteDraftStore();
+
+  const handleChange = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    setDraft({
+      ...draft,
+      [event.target.name]: event.target.value,
+    });
+  };
   const mutation = useMutation({
     mutationFn: async (newNote: NotePost) => await createNote(newNote),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["noteHubKey"] });
-      onClose?.();
       toast.success("Your note added successfully");
+      queryClient.invalidateQueries({ queryKey: ["noteHubKey"] });
+      clearDraft();
+      router.push("/filter/All");
     },
   });
 
@@ -51,7 +66,14 @@ export default function NoteForm({ onClose }: NoteFormProps) {
           <label className={css.lable} htmlFor="title">
             Title
           </label>
-          <Field id="title" type="text" name="title" className={css.input} />
+          <Field
+            id="title"
+            type="text"
+            name="title"
+            className={css.input}
+            value={draft?.title}
+            onChange={handleChange}
+          />
           <ErrorMessage name="title" className={css.error} component="span" />
         </div>
 
@@ -65,6 +87,8 @@ export default function NoteForm({ onClose }: NoteFormProps) {
             as="textarea"
             rows={8}
             className={css.textarea}
+            value={draft?.content}
+            onChange={handleChange}
           />
           <ErrorMessage name="content" component="span" className={css.error} />
         </div>
@@ -72,7 +96,14 @@ export default function NoteForm({ onClose }: NoteFormProps) {
           <label className={css.lable} htmlFor="tag">
             Tag
           </label>
-          <Field as="select" id="tag" name="tag" className={css.select}>
+          <Field
+            as="select"
+            id="tag"
+            name="tag"
+            className={css.select}
+            value={draft?.tag}
+            onChange={handleChange}
+          >
             <option value="Todo">Todo</option>
             <option value="Work">Work</option>
             <option value="Personal">Personal</option>
@@ -82,7 +113,11 @@ export default function NoteForm({ onClose }: NoteFormProps) {
           <ErrorMessage name="tag" component="span" className={css.error} />
         </div>
         <div className={css.actions}>
-          <button className={css.cancelButton} type="button" onClick={onClose}>
+          <button
+            className={css.cancelButton}
+            type="button"
+            onClick={() => router.back()}
+          >
             Cancel
           </button>
           <button className={css.submitButton} type="submit">

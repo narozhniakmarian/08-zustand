@@ -10,7 +10,7 @@ export interface NotesResponse {
 
 const BASE_URL = "https://notehub-public.goit.study/api/notes";
 const API_TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
-console.log(API_TOKEN);
+
 const buildFetchConfig = (params?: Record<string, string | number>) => ({
   params,
   accept: "application/json",
@@ -37,7 +37,7 @@ async function noteFetch(
       Authorization: `Bearer ${API_TOKEN}`,
     },
   });
-  console.log(response.data);
+
   return response.data;
 }
 export default noteFetch;

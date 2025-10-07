@@ -1,4 +1,4 @@
-//app>notes>page.tsx
+//app>notes>filter/[...slug]/page.tsx
 
 import noteFetch from "@/lib/api";
 import {
@@ -9,13 +9,35 @@ import {
 import NotesClient from "./Notes.client";
 
 interface NotesProps {
-  params: Promise<{ slug: string[] }>;
+  params: { slug: string[] };
+}
+export async function generateMetadata({ params }: NotesProps) {
+  const { slug } = params;
+  const filterName = slug.join(" / ");
+
+  return {
+    title: `Filter: ${filterName}`,
+    description: `Переглянь нотатки за фільтром: ${filterName}`,
+    openGraph: {
+      title: `Filter: ${filterName}`,
+      description: `Переглянь нотатки за фільтром: ${filterName}`,
+      url: `https://notehub.com/notes/filter/${slug.join("/")}`,
+      images: [
+        {
+          url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+          width: 1200,
+          height: 630,
+          alt: `Фільтр: ${filterName}`,
+        },
+      ],
+    },
+  };
 }
 
 async function Notes({ params }: NotesProps) {
   const queryClient = new QueryClient();
 
-  const { slug } = await params;
+  const { slug } = params;
   const tag = slug[0] === "All" ? undefined : slug[0];
 
   const search = "";

@@ -1,3 +1,5 @@
+//components / SidebarNotes /AnimatedLink/AnimatedLink.tsx;
+
 import styles from "./AnimatedLink.module.scss";
 import Link from "next/link";
 
