@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { NotePost } from "@/types/note";
 import { createNote } from "@/lib/api";
 import { useRouter } from "next/navigation";
-import { useNoteDraftStore } from "@/lib/stores/counterStore";
+import { useNoteDraftStore } from "@/lib/store/counterStore";
 
 // const InitialValues: NotePost = {
 //   title: "",
