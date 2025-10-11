@@ -4,11 +4,10 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import * as Yup from "yup";
 import css from "./NoteForm.module.css";
-import { toast } from "react-toastify";
 import { NotePost } from "@/types/note";
 import { createNote } from "@/lib/api";
 import { useRouter } from "next/navigation";
-import { useNoteDraftStore } from "@/lib/store/counterStore";
+import { useNoteDraftStore } from "@/lib/store/noteStore";
 
 // const InitialValues: NotePost = {
 //   title: "",
